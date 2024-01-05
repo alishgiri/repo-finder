@@ -1,6 +1,7 @@
 import {
   View,
   Text,
+  Image,
   FlatList,
   StatusBar,
   SafeAreaView,
@@ -37,13 +38,17 @@ function Home({navigation}: HomeNavigationProps): React.JSX.Element {
         style={tailwind(
           `mb-5 text-white justify-center ${result ? '' : 'flex-grow'}`,
         )}>
+        <Image
+          source={require('../images/github.png')}
+          style={tailwind('w-20 h-20 self-center my-5')}
+        />
         <HeaderSearchBar
           onChangeText={onChangeText}
           onClearSearch={clearSearch}
           totalResults={result?.totalResults}
         />
 
-        {isLoading && <ActivityIndicator style={tailwind('mb-5')} />}
+        {isLoading && <ActivityIndicator style={tailwind('my-2')} />}
         {error && (
           <Text style={tailwind('mx-5 mb-5 text-red-400')}>{error}</Text>
         )}
@@ -55,7 +60,7 @@ function Home({navigation}: HomeNavigationProps): React.JSX.Element {
       {result?.users && (
         <>
           <Text style={tailwind('mx-5 mb-4 text-gray-200')}>
-            Click to view their repository.
+            Click to view their public repositories.
           </Text>
 
           <FlatList

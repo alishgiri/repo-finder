@@ -12,7 +12,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import {RootStackParamList} from '../utils/navigation';
 import useFetchRepositories from '../service/use-fetch-repositories';
-import RepositoryBlock from '../components/user-repository/repository-block';
+import RepositoryBlock from '../components/user-repositories/repository-block';
 
 type NavigationProps = NativeStackScreenProps<
   RootStackParamList,

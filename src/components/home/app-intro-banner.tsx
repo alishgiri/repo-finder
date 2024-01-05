@@ -1,19 +1,19 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
+import {View, Text} from 'react-native';
 
 function AppIntroBanner(): React.JSX.Element {
   const tailwind = useTailwind();
   return (
     <View
       style={tailwind(
-        'rounded-xl bg-app-primary items-center justify-center p-10',
+        'rounded-xl bg-app-primary items-center justify-center py-4 px-3 mb-4 mx-4 mt-2',
       )}>
-      <Text style={tailwind('text-4xl text-app-light text-center')}>
+      <Text style={tailwind('text-2xl text-app-light text-center font-bold')}>
         GitHub Repo Finder
       </Text>
       <Text style={tailwind('text-base text-app-light text-center')}>
-        Find the user and view their repository.
+        Find the user and view their public repositories.
       </Text>
     </View>
   );
