@@ -20,7 +20,7 @@ type HomeNavigationProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 function Home({navigation}: HomeNavigationProps): React.JSX.Element {
   const tailwind = useTailwind();
-  const [searchUser, result, isLoading, error] = useSearchUser();
+  const [searchUser, result, clearSearch, isLoading, error] = useSearchUser();
 
   const onChangeText = (value: string) => searchUser(value);
 
@@ -39,6 +39,7 @@ function Home({navigation}: HomeNavigationProps): React.JSX.Element {
         )}>
         <HeaderSearchBar
           onChangeText={onChangeText}
+          onClearSearch={clearSearch}
           totalResults={result?.totalResults}
         />
 

@@ -11,6 +11,7 @@ interface UserSearchResult {
 const useSearchUser = (): [
   searchUser: (searchTerm: string) => Promise<void>,
   result: UserSearchResult | null,
+  clearSearch: () => void,
   isLoading: boolean,
   error: string | null | undefined,
 ] => {
@@ -24,7 +25,7 @@ const useSearchUser = (): [
     softReset();
 
     if (searchTerm.length === 0) {
-      hardReset();
+      clearSearch();
       return;
     } else if (searchTerm.length <= 2) {
       return;
@@ -71,7 +72,7 @@ const useSearchUser = (): [
     }
   };
 
-  const hardReset = () => {
+  const clearSearch = () => {
     setError(null);
     setResult(null);
     setIsLoading(false);
@@ -85,7 +86,7 @@ const useSearchUser = (): [
     }
   };
 
-  return [searchUser, result, isLoading, error];
+  return [searchUser, result, clearSearch, isLoading, error];
 };
 
 export default useSearchUser;
