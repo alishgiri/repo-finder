@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import {Octokit} from 'octokit';
 
+import {octokit} from './base.service';
 import {GitHubUser} from '../models/github-user.model';
 
 interface UserSearchResult {
@@ -20,24 +20,18 @@ const useSearchUser = (): [
   const [error, setError] = useState<string | null>();
   const [result, setResult] = useState<UserSearchResult | null>(null);
 
-  const octokit = new Octokit();
-
   const searchUser = async (searchTerm: string) => {
-    clearTimeout(timer);
+    softReset();
 
     if (searchTerm.length === 0) {
       hardReset();
       return;
-    }
-
-    if (searchTerm.length <= 2) return;
-
-    if (searchTerm.length > 100) {
+    } else if (searchTerm.length <= 2) {
+      return;
+    } else if (searchTerm.length > 100) {
       setError('Search term has to be less than 100 characters.');
       return;
     }
-
-    softReset();
 
     timer = setTimeout(() => fetchUsers(searchTerm), 800);
   };
@@ -71,6 +65,7 @@ const useSearchUser = (): [
   };
 
   const softReset = () => {
+    clearTimeout(timer);
     if (error != null) {
       setError(null);
     }

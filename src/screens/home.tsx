@@ -9,16 +9,24 @@ import {
 import React from 'react';
 import {useTailwind} from 'tailwind-rn';
 
-import UserBlock from '../components/user-block';
-import useSearchUser from '../service/search-user';
-import AppIntroBanner from '../components/app-intro-banner';
-import HeaderSearchBar from '../components/header-search-bar';
+import UserBlock from '../components/home/user-block';
+import {RootStackParamList} from '../utils/navigation';
+import useSearchUser from '../service/use-search-user';
+import AppIntroBanner from '../components/home/app-intro-banner';
+import HeaderSearchBar from '../components/home/header-search-bar';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-function Home(): React.JSX.Element {
+type HomeNavigationProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+function Home({navigation}: HomeNavigationProps): React.JSX.Element {
   const tailwind = useTailwind();
   const [searchUser, result, isLoading, error] = useSearchUser();
 
   const onChangeText = (value: string) => searchUser(value);
+
+  const gotoUserRepositoriesScreen = (githubUsername: string) => {
+    navigation.push('UserRepositories', {username: githubUsername});
+  };
 
   return (
     <SafeAreaView style={tailwind('bg-app-dark flex-1 justify-between')}>
@@ -58,7 +66,12 @@ function Home(): React.JSX.Element {
             contentContainerStyle={tailwind(
               'rounded-tr-xl rounded-tl-xl overflow-hidden bg-white flex-grow',
             )}
-            renderItem={({item}) => <UserBlock user={item} />}
+            renderItem={({item}) => (
+              <UserBlock
+                user={item}
+                onPress={() => gotoUserRepositoriesScreen(item.login)}
+              />
+            )}
           />
         </>
       )}

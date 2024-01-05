@@ -21,11 +21,10 @@ function HeaderSearchBar(props: HeaderSearchBarProps): React.JSX.Element {
           <Icon name="person-search" size={30} color="#F0ECE5" />
         </View>
         <TextInput
-          cursorColor="#B6BBC4"
           placeholderTextColor="#B6BBC4"
           onChangeText={props.onChangeText}
           placeholder="Search GitHub User..."
-          style={tailwind('p-5 text-xl flex-grow text-app-primary')}
+          style={tailwind('p-4 h-full text-xl flex-grow text-app-primary mb-1')}
         />
       </View>
       {props.totalResults && (
