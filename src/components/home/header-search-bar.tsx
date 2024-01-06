@@ -36,7 +36,7 @@ function HeaderSearchBar(props: HeaderSearchBarProps): React.JSX.Element {
           placeholder="Search GitHub User..."
           style={tailwind('p-4 h-full text-xl flex-grow text-app-primary mb-1')}
         />
-        {props.totalResults && (
+        {props.totalResults != null && (
           <TouchableWithoutFeedback onPress={onClearTextInput}>
             <View style={tailwind('p-2 mr-2 bg-app-primary rounded-full')}>
               <Icon name="close" size={20} color="#F0ECE5" />
@@ -44,7 +44,7 @@ function HeaderSearchBar(props: HeaderSearchBarProps): React.JSX.Element {
           </TouchableWithoutFeedback>
         )}
       </View>
-      {props.totalResults && (
+      {props.totalResults != null && (
         <View
           style={tailwind('mx-5 text-white flex-row items-center justify-end')}>
           <Text style={tailwind('text-gray-200 text-base')}>
