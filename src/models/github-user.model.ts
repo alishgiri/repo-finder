@@ -1,6 +1,8 @@
 export interface GitHubUser {
   id: number;
+
+  // Owner Username
   login: string;
-  reposUrl: string;
+
   avatarUrl: string;
 }
