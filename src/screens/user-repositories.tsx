@@ -38,7 +38,7 @@ function UserRepositories({
 
       <View
         style={tailwind(
-          `mb-5 text-white justify-center ${result ? '' : 'flex-grow'}`,
+          `mb-2 text-white justify-center ${result ? '' : 'flex-grow'}`,
         )}>
         {isLoading && <ActivityIndicator style={tailwind('mb-5')} />}
         {error && (
@@ -50,17 +50,9 @@ function UserRepositories({
 
       {result?.repositories && (
         <>
-          <View
-            style={tailwind(
-              'mb-4 mx-4 text-white flex-row items-center justify-end',
-            )}>
-            <Text style={tailwind('text-gray-200 text-base')}>
-              Number of Repositories:
-            </Text>
-            <Text style={tailwind('ml-1 text-white text-2xl font-bold')}>
-              {result?.totalResults}
-            </Text>
-          </View>
+          <Text style={tailwind('text-gray-200 text-2xl font-bold mx-4')}>
+            Repositories
+          </Text>
           <Text style={tailwind('text-gray-200 text-sm mx-4 mb-2')}>
             Click to view more info.
           </Text>

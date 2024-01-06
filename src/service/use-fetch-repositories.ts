@@ -4,7 +4,6 @@ import {octokit} from './base.service';
 import {UserRepository} from '../models/user-repository.model';
 
 interface FetchRepositoriesResult {
-  totalResults: number;
   repositories: UserRepository[];
 }
 
@@ -43,15 +42,14 @@ const useFetchRepositories = (
         data.push({
           id: repo.id,
           name: repo.name,
+          forksCount: repo.forks_count,
           ownerLogin: repo.owner.login,
           description: repo.description,
+          stargazersCount: repo.stargazers_count,
         });
       });
 
-      setResult({
-        repositories: data,
-        totalResults: response.data.length,
-      });
+      setResult({repositories: data});
     } catch (e) {
       handleError(e);
     } finally {
