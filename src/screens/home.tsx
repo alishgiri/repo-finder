@@ -9,13 +9,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useTailwind} from 'tailwind-rn';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import UserBlock from '../components/home/user-block';
 import {RootStackParamList} from '../utils/navigation';
 import useSearchUser from '../service/use-search-user';
+import NoItemsFound from '../components/no-items-found';
 import AppIntroBanner from '../components/home/app-intro-banner';
 import HeaderSearchBar from '../components/home/header-search-bar';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 type HomeNavigationProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -67,6 +68,7 @@ function Home({navigation}: HomeNavigationProps): React.JSX.Element {
             data={result?.users}
             indicatorStyle="black"
             keyboardDismissMode="on-drag"
+            ListEmptyComponent={<NoItemsFound />}
             keyExtractor={(item, _) => `${item.id}`}
             contentInsetAdjustmentBehavior="automatic"
             style={tailwind('rounded-tr-xl rounded-tl-xl')}

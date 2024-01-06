@@ -11,6 +11,7 @@ import {useTailwind} from 'tailwind-rn';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import {RootStackParamList} from '../utils/navigation';
+import NoItemsFound from '../components/no-items-found';
 import useFetchRepositories from '../service/use-fetch-repositories';
 import RepositoryBlock from '../components/user-repositories/repository-block';
 
@@ -60,6 +61,7 @@ function UserRepositories({
             indicatorStyle="black"
             data={result?.repositories}
             keyboardDismissMode="on-drag"
+            ListEmptyComponent={<NoItemsFound />}
             keyExtractor={(item, _) => `${item.id}`}
             contentInsetAdjustmentBehavior="automatic"
             style={tailwind('rounded-tr-xl rounded-tl-xl')}
