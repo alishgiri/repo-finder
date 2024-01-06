@@ -67,6 +67,7 @@ function Home({navigation}: HomeNavigationProps): React.JSX.Element {
             data={result?.users}
             indicatorStyle="black"
             keyboardDismissMode="on-drag"
+            keyExtractor={(item, _) => `${item.id}`}
             contentInsetAdjustmentBehavior="automatic"
             style={tailwind('rounded-tr-xl rounded-tl-xl')}
             contentContainerStyle={tailwind(

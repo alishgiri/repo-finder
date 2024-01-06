@@ -68,6 +68,7 @@ function UserRepositories({
             indicatorStyle="black"
             data={result?.repositories}
             keyboardDismissMode="on-drag"
+            keyExtractor={(item, _) => `${item.id}`}
             contentInsetAdjustmentBehavior="automatic"
             style={tailwind('rounded-tr-xl rounded-tl-xl')}
             contentContainerStyle={tailwind(
