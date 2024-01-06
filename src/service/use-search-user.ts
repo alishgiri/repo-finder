@@ -4,7 +4,7 @@ import {octokit} from './base.service';
 import {GitHubUser} from '../models/github-user.model';
 
 interface UserSearchResult {
-  users: [GitHubUser];
+  users: GitHubUser[];
   totalResults: number;
 }
 
@@ -47,15 +47,17 @@ const useSearchUser = (): [
         },
       });
 
-      const data = response.data.items.map(user => ({
-        id: user.id,
-        login: user.login,
-        reposUrl: user.repos_url,
-        avatarUrl: user.avatar_url,
-      }));
+      const data: GitHubUser[] = [];
+      response.data.items.forEach(user => {
+        data.push({
+          id: user.id,
+          login: user.login,
+          avatarUrl: user.avatar_url,
+        });
+      });
 
       setResult({
-        users: data as [GitHubUser],
+        users: data,
         totalResults: response.data.total_count,
       });
     } catch (e) {

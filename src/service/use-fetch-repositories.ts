@@ -5,7 +5,7 @@ import {UserRepository} from '../models/user-repository.model';
 
 interface FetchRepositoriesResult {
   totalResults: number;
-  repositories: [UserRepository];
+  repositories: UserRepository[];
 }
 
 const useFetchRepositories = (
@@ -38,15 +38,19 @@ const useFetchRepositories = (
         },
       });
 
-      const data = response.data.map(repo => ({
-        id: repo.id,
-        name: repo.name,
-        description: repo.description,
-      }));
+      const data: UserRepository[] = [];
+      response.data.forEach(repo => {
+        data.push({
+          id: repo.id,
+          name: repo.name,
+          ownerLogin: repo.owner.login,
+          description: repo.description,
+        });
+      });
 
       setResult({
+        repositories: data,
         totalResults: response.data.length,
-        repositories: data as [UserRepository],
       });
     } catch (e) {
       handleError(e);
