@@ -36,7 +36,6 @@ function UserRepositories({
     <SafeAreaView style={tailwind('bg-app-dark flex-1 justify-between')}>
       <StatusBar barStyle="light-content" />
 
-      {/* Top Section */}
       <View
         style={tailwind(
           `mb-5 text-white justify-center ${result ? '' : 'flex-grow'}`,
@@ -49,21 +48,36 @@ function UserRepositories({
         )}
       </View>
 
-      {/* Bottom Section */}
       {result?.repositories && (
-        <FlatList
-          indicatorStyle="black"
-          data={result?.repositories}
-          keyboardDismissMode="on-drag"
-          contentInsetAdjustmentBehavior="automatic"
-          style={tailwind('rounded-tr-xl rounded-tl-xl')}
-          contentContainerStyle={tailwind(
-            'rounded-tr-xl rounded-tl-xl overflow-hidden bg-white flex-grow',
-          )}
-          renderItem={({item, index}) => (
-            <RepositoryBlock repo={item} index={index} />
-          )}
-        />
+        <>
+          <View
+            style={tailwind(
+              'mb-4 mx-4 text-white flex-row items-center justify-end',
+            )}>
+            <Text style={tailwind('text-gray-200 text-base')}>
+              Number of Repositories:
+            </Text>
+            <Text style={tailwind('ml-1 text-white text-2xl font-bold')}>
+              {result?.totalResults}
+            </Text>
+          </View>
+          <Text style={tailwind('text-gray-200 text-sm mx-4 mb-2')}>
+            Click to view more info.
+          </Text>
+          <FlatList
+            indicatorStyle="black"
+            data={result?.repositories}
+            keyboardDismissMode="on-drag"
+            contentInsetAdjustmentBehavior="automatic"
+            style={tailwind('rounded-tr-xl rounded-tl-xl')}
+            contentContainerStyle={tailwind(
+              'rounded-tr-xl rounded-tl-xl overflow-hidden bg-white flex-grow',
+            )}
+            renderItem={({item, index}) => (
+              <RepositoryBlock repo={item} index={index} />
+            )}
+          />
+        </>
       )}
     </SafeAreaView>
   );
